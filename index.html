@@ -90,6 +90,43 @@
     font-size: 0.85rem;
   }
 
+  #opener {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #ffd6e8 0%, #ffe9f1 50%, #ffc9df 100%);
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: Georgia, "Times New Roman", serif;
+    transition: opacity 0.9s ease;
+  }
+  #opener.opened { opacity: 0; pointer-events: none; }
+
+  #opener .envelope {
+    font-size: 4.5rem;
+    animation: bounce 1.6s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  #opener .invite {
+    color: #c15b8b;
+    font-size: 1.4rem;
+    font-style: italic;
+  }
+  #opener .hint {
+    color: #d489ab;
+    font-size: 0.95rem;
+  }
+
   .bow {
     position: absolute;
     width: 64px;
@@ -186,5 +223,68 @@
 
     </div>
   </div>
+
+  <button id="opener" type="button">
+    <span class="envelope">💌</span>
+    <span class="invite">A little something for you, Mora…</span>
+    <span class="hint">tap anywhere to open 🎀</span>
+  </button>
+
+  <script>
+    const opener = document.getElementById('opener');
+    let ctx;
+
+    // "Happy Birthday to You" melody (public domain) in C major.
+    // Each entry: [frequency in Hz, length in beats]
+    const G4 = 392.00, A4 = 440.00, B4 = 493.88, C5 = 523.25,
+          D5 = 587.33, E5 = 659.25, F5 = 698.46, G5 = 783.99;
+    const MELODY = [
+      [G4, .75], [G4, .25], [A4, 1], [G4, 1], [C5, 1], [B4, 2],
+      [G4, .75], [G4, .25], [A4, 1], [G4, 1], [D5, 1], [C5, 2],
+      [G4, .75], [G4, .25], [G5, 1], [E5, 1], [C5, 1], [B4, 1], [A4, 2],
+      [F5, .75], [F5, .25], [E5, 1], [C5, 1], [D5, 1], [C5, 2],
+    ];
+    const BEAT = 0.42; // seconds per beat
+
+    function note(freq, start, dur) {
+      // music-box voice: a triangle wave with a soft octave shimmer
+      [[freq, 0.18, 'triangle'], [freq * 2, 0.05, 'sine']].forEach(([f, vol, type]) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.value = f;
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(vol, start + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur * 0.95);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(start);
+        osc.stop(start + dur);
+      });
+    }
+
+    function playSong() {
+      if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+      ctx.resume();
+      let t = ctx.currentTime + 0.15;
+      for (const [freq, beats] of MELODY) {
+        note(freq, t, beats * BEAT);
+        t += beats * BEAT;
+      }
+      return (t - ctx.currentTime) * 1000; // song length in ms
+    }
+
+    function loopSong() {
+      const ms = playSong();
+      // schedule the next verse with a short breath in between,
+      // repeating until she closes the page
+      setTimeout(loopSong, ms + 1200);
+    }
+
+    opener.addEventListener('click', () => {
+      loopSong();
+      opener.classList.add('opened');
+      setTimeout(() => opener.remove(), 1000);
+    }, { once: true });
+  </script>
 </body>
 </html>
