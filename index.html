@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Mora 🎀</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffe3ec 0%, #fff5f7 50%, #ffd6e8 100%);
+    font-family: Georgia, "Times New Roman", serif;
+    padding: 24px;
+  }
+
+  .card-wrap {
+    position: relative;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .card {
+    background: #fffdfa;
+    border: 2px solid #e8a0bf;
+    border-radius: 18px;
+    padding: 56px 44px;
+    box-shadow: 0 12px 40px rgba(232, 160, 191, 0.35);
+    text-align: center;
+  }
+
+  h1 {
+    color: #c15b8b;
+    font-size: 2rem;
+    margin-bottom: 22px;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    color: #6b4453;
+    font-size: 1.15rem;
+    line-height: 1.75;
+  }
+
+  .hearts {
+    margin-top: 26px;
+    font-size: 1.3rem;
+    letter-spacing: 10px;
+  }
+
+  .bow {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    z-index: 2;
+  }
+  .bow.tl { top: -28px; left: -28px; }
+  .bow.tr { top: -28px; right: -28px; transform: scaleX(-1); }
+  .bow.bl { bottom: -28px; left: -28px; transform: scaleY(-1); }
+  .bow.br { bottom: -28px; right: -28px; transform: scale(-1); }
+
+  @media (max-width: 480px) {
+    .card { padding: 44px 26px; }
+    h1 { font-size: 1.5rem; }
+    .bow { width: 48px; height: 48px; }
+    .bow.tl { top: -20px; left: -14px; }
+    .bow.tr { top: -20px; right: -14px; }
+    .bow.bl { bottom: -20px; left: -14px; }
+    .bow.br { bottom: -20px; right: -14px; }
+  }
+</style>
+</head>
+<body>
+  <div class="card-wrap">
+    <!-- bow SVG used at each corner -->
+    <svg class="bow tl" viewBox="0 0 100 100" aria-hidden="true">
+      <g>
+        <path d="M50 50 C 20 20, 5 25, 10 45 C 13 58, 35 58, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 20 80, 5 75, 10 55 C 13 42, 35 42, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 20, 95 25, 90 45 C 87 58, 65 58, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 80, 95 75, 90 55 C 87 42, 65 42, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M46 52 C 40 70, 42 82, 48 92 L 56 88 C 51 78, 51 66, 54 54 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M54 52 C 62 68, 66 78, 64 90 L 56 88 C 57 76, 53 64, 48 54 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <circle cx="50" cy="50" r="9" fill="#c15b8b" stroke="#a34372" stroke-width="2"/>
+      </g>
+    </svg>
+    <svg class="bow tr" viewBox="0 0 100 100" aria-hidden="true">
+      <g>
+        <path d="M50 50 C 20 20, 5 25, 10 45 C 13 58, 35 58, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 20 80, 5 75, 10 55 C 13 42, 35 42, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 20, 95 25, 90 45 C 87 58, 65 58, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 80, 95 75, 90 55 C 87 42, 65 42, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M46 52 C 40 70, 42 82, 48 92 L 56 88 C 51 78, 51 66, 54 54 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M54 52 C 62 68, 66 78, 64 90 L 56 88 C 57 76, 53 64, 48 54 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <circle cx="50" cy="50" r="9" fill="#c15b8b" stroke="#a34372" stroke-width="2"/>
+      </g>
+    </svg>
+    <svg class="bow bl" viewBox="0 0 100 100" aria-hidden="true">
+      <g>
+        <path d="M50 50 C 20 20, 5 25, 10 45 C 13 58, 35 58, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 20 80, 5 75, 10 55 C 13 42, 35 42, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 20, 95 25, 90 45 C 87 58, 65 58, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 80, 95 75, 90 55 C 87 42, 65 42, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M46 52 C 40 70, 42 82, 48 92 L 56 88 C 51 78, 51 66, 54 54 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M54 52 C 62 68, 66 78, 64 90 L 56 88 C 57 76, 53 64, 48 54 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <circle cx="50" cy="50" r="9" fill="#c15b8b" stroke="#a34372" stroke-width="2"/>
+      </g>
+    </svg>
+    <svg class="bow br" viewBox="0 0 100 100" aria-hidden="true">
+      <g>
+        <path d="M50 50 C 20 20, 5 25, 10 45 C 13 58, 35 58, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 20 80, 5 75, 10 55 C 13 42, 35 42, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 20, 95 25, 90 45 C 87 58, 65 58, 50 50 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M50 50 C 80 80, 95 75, 90 55 C 87 42, 65 42, 50 50 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M46 52 C 40 70, 42 82, 48 92 L 56 88 C 51 78, 51 66, 54 54 Z" fill="#e8749e" stroke="#c15b8b" stroke-width="2"/>
+        <path d="M54 52 C 62 68, 66 78, 64 90 L 56 88 C 57 76, 53 64, 48 54 Z" fill="#f2a0bd" stroke="#c15b8b" stroke-width="2"/>
+        <circle cx="50" cy="50" r="9" fill="#c15b8b" stroke="#a34372" stroke-width="2"/>
+      </g>
+    </svg>
+
+    <div class="card">
+      <h1>Happy Birthday Mora 🎂</h1>
+      <p>Happy Birthday Mora, I made you a playlist of alot of songs I have enjoyed over the years. And i hope you can find some new favourites among these and enjoy them as much as i did</p>
+      <div class="hearts">🎀 🎵 🎶 💗 🎀</div>
+    </div>
+  </div>
+</body>
+</html>
