@@ -127,6 +127,25 @@
     font-size: 0.95rem;
   }
 
+  #music-btn {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    background: #fffdfa;
+    border: 1px solid #e8a0bf;
+    border-radius: 999px;
+    padding: 9px 18px;
+    color: #c15b8b;
+    font-family: Georgia, serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(232, 160, 191, 0.35);
+    display: none;
+  }
+  #music-btn.show { display: block; }
+
   .bow {
     position: absolute;
     width: 64px;
@@ -230,8 +249,11 @@
     <span class="hint">tap anywhere to open 🎀</span>
   </button>
 
+  <button id="music-btn" type="button">⏸️ Stop the music</button>
+
   <script>
     const opener = document.getElementById('opener');
+    const musicBtn = document.getElementById('music-btn');
     let ctx;
 
     // "Happy Birthday to You" melody (public domain) in C major.
@@ -273,18 +295,50 @@
       return (t - ctx.currentTime) * 1000; // song length in ms
     }
 
+    let loopTimer = null;
+    let playing = false;
+    let pausedByLeaving = false;
+
     function loopSong() {
       const ms = playSong();
-      // schedule the next verse with a short breath in between,
-      // repeating until she closes the page
-      setTimeout(loopSong, ms + 1200);
+      // schedule the next verse with a short breath in between
+      loopTimer = setTimeout(loopSong, ms + 1200);
+    }
+
+    function startMusic() {
+      playing = true;
+      loopSong();
+      musicBtn.textContent = '⏸️ Stop the music';
+    }
+
+    function stopMusic() {
+      playing = false;
+      clearTimeout(loopTimer);
+      if (ctx) { ctx.close(); ctx = null; } // silences already-scheduled notes immediately
+      musicBtn.textContent = '🎵 Play the music';
     }
 
     opener.addEventListener('click', () => {
-      loopSong();
+      startMusic();
+      musicBtn.classList.add('show');
       opener.classList.add('opened');
       setTimeout(() => opener.remove(), 1000);
     }, { once: true });
+
+    musicBtn.addEventListener('click', () => {
+      playing ? stopMusic() : startMusic();
+    });
+
+    // stop when she leaves the site or switches tabs; resume if she comes back
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && playing) {
+        stopMusic();
+        pausedByLeaving = true;
+      } else if (!document.hidden && pausedByLeaving) {
+        pausedByLeaving = false;
+        startMusic();
+      }
+    });
   </script>
 </body>
 </html>
